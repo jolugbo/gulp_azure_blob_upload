@@ -6,7 +6,7 @@ const config = {
   development: {
     root: rootPath,
     app: {
-      name: 'fractals'
+      name: 'Fractals.io {dev setup}'
     },
     port: process.env.PORT || 3000,
   },
@@ -14,7 +14,7 @@ const config = {
   test: {
     root: rootPath,
     app: {
-      name: 'fractals'
+      name: 'Fractals.io {test setup}'
     },
     port: process.env.PORT || 3000,
   },
@@ -22,7 +22,7 @@ const config = {
   production: {
     root: rootPath,
     app: {
-      name: 'fractals'
+      name: 'Fractals.io  {prod setup}'
     },
     port: process.env.PORT || 3000,
   }
