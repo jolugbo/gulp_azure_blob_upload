@@ -8,6 +8,7 @@ module.exports = (app) => {
 };
 
 router.get('/', (req, res, next) => {
+  throw new Error("Failed!!");
   const articles = [new Article(), new Article()];
   res.render('index', {
     title: Config.app.name,

@@ -7,16 +7,24 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const compress = require('compression');
 const methodOverride = require('method-override');
+const appInsights = require('applicationInsights');
 
 module.exports = (app, config) => {
   const env = process.env.NODE_ENV || 'development';
   app.locals.ENV = env;
   app.locals.ENV_DEVELOPMENT = env == 'development';
-  
+
+  appInsights.setup(config.instrumentationKey).start();
+  const aiClient = appInsights.getClient(config.instrumentationKey);
+
   app.set('views', config.root + '/app/views');
   app.set('view engine', 'jade');
 
   // app.use(favicon(config.root + '/public/img/favicon.ico'));
+  app.use(function(req,res,next){
+    aiClient.trackRequest(req,res);
+    next();
+  });
   app.use(logger('dev'));
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({
@@ -50,6 +58,7 @@ module.exports = (app, config) => {
   }
 
   app.use((err, req, res, next) => {
+    aiClient.trackException(err);
     res.status(err.status || 500);
     res.render('error', {
       message: err.message,

@@ -3,10 +3,11 @@ const rootPath = path.normalize(__dirname + '/..');
 const env = process.env.NODE_ENV || 'development';
 
 const config = {
+  instrumentationKey: 'f7802948-ea47-419e-9224-42b78ae39f21',
   development: {
     root: rootPath,
     app: {
-      name: 'Fractals.io (dev setup)'
+      name: 'Fractals.io (dev)'
     },
     port: process.env.PORT || 3000,
   },
@@ -14,7 +15,7 @@ const config = {
   test: {
     root: rootPath,
     app: {
-      name: 'Fractals.io (test setup)'
+      name: 'Fractals.io (test)'
     },
     port: process.env.PORT || 3000,
   },
@@ -22,7 +23,7 @@ const config = {
   production: {
     root: rootPath,
     app: {
-      name: 'Fractals.io  (prod setup)'
+      name: 'Fractals.io  (prod)'
     },
     port: process.env.PORT || 3000,
   }
