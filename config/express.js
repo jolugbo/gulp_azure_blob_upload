@@ -1,6 +1,7 @@
 const express = require('express');
 const glob = require('glob');
 
+
 const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
@@ -9,13 +10,15 @@ const compress = require('compression');
 const methodOverride = require('method-override');
 const appInsights = require('applicationInsights');
 
+const instrumentationKey = 'f7802948-ea47-419e-9224-42b78ae39f21';
+
 module.exports = (app, config) => {
   const env = process.env.NODE_ENV || 'development';
   app.locals.ENV = env;
   app.locals.ENV_DEVELOPMENT = env == 'development';
 
-  appInsights.setup(config.instrumentationKey).start();
-  const aiClient = appInsights.getClient(config.instrumentationKey);
+  appInsights.setup(instrumentationKey).start();
+  const aiClient = appInsights.getClient(instrumentationKey);
 
   app.set('views', config.root + '/app/views');
   app.set('view engine', 'jade');

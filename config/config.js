@@ -3,7 +3,7 @@ const rootPath = path.normalize(__dirname + '/..');
 const env = process.env.NODE_ENV || 'development';
 
 const config = {
-  instrumentationKey: 'f7802948-ea47-419e-9224-42b78ae39f21',
+ // instrumentationKey: 'f7802948-ea47-419e-9224-42b78ae39f21',
   development: {
     root: rootPath,
     app: {
