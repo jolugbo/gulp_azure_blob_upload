@@ -8,7 +8,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const compress = require('compression');
 const methodOverride = require('method-override');
-const appInsights = require('applicationInsights');
+const appInsights = require('applicationinsights');
 
 const instrumentationKey = 'f7802948-ea47-419e-9224-42b78ae39f21';
 
@@ -18,14 +18,14 @@ module.exports = (app, config) => {
   app.locals.ENV_DEVELOPMENT = env == 'development';
 
   appInsights.setup(instrumentationKey).start();
-  const aiClient = appInsights.getClient(instrumentationKey);
+  const aiClient = appInsights.defaultClient;
 
   app.set('views', config.root + '/app/views');
   app.set('view engine', 'jade');
 
   // app.use(favicon(config.root + '/public/img/favicon.ico'));
   app.use(function(req,res,next){
-    aiClient.trackRequest(req,res);
+    aiClient.trackRequest({name:"GET /customers", url:"http://localhost:3000/", duration:309, resultCode:200, success:true});
     next();
   });
   app.use(logger('dev'));
