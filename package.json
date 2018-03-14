@@ -12,7 +12,9 @@
   },
   "dependencies": {
     "applicationinsights": "^1.0.2",
+    "azure-storage": "^2.8.1",
     "body-parser": "^1.13.3",
+    "busboy": "^0.2.14",
     "compression": "^1.5.2",
     "cookie-parser": "^1.3.3",
     "express": "^4.13.3",
