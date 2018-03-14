@@ -18,6 +18,7 @@ router.get('/', (req, res, next) => {
   });
 });
 router.post('/upload', function(req,res){
+        console.log('got here');
   var busboy = new Busboy({headers:req.headers});
 
   busboy.on('file',function(fieldname,file,filename,encoding,mimetype){
