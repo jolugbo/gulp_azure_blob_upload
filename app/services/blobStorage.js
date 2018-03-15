@@ -9,7 +9,23 @@ function saveToBlob(name,stream,cb){
     stream.pipe(blobService.createWriteStreamToBlockBlob(images,name,cb));
 }
 function getUrl(name){
-    return blobService.getUrl(images,name);
+    var startDate = new Date();
+    startDate.setMinutes(startDate.getMinutes() - 15);
+
+    var expiryDate = new Date(startDate);
+    expiryDate.setMinutes(startDate.getMinutes() + 30);
+
+    var permissions = azure.BlobUtilities.SharedAccessPermissions.READ;
+
+    var sharedAccessPolicy ={
+        AccessPolicy:{
+            Permissions: permissions,
+            Start: startDate,
+            Expiry: expiryDate
+        }
+    };
+    var sasToken = blobService.generateSharedAccessSignature(images,name,sharedAccessPolicy)
+    return blobService.getUrl(images,name,sasToken);
 }
 module.exports={
     saveToBlob: saveToBlob,
