@@ -17,25 +17,25 @@ router.get('/', (req, res, next) => {
     articles: articles
   });
 });
-router.post('/upload', function(req,res){
-        console.log('got here');
-  var busboy = new Busboy({headers:req.headers});
+router.post('/upload', function (req, res) {
+  console.log('got here');
+  var busboy = new Busboy({ headers: req.headers });
 
-  busboy.on('file',function(fieldname,file,filename,encoding,mimetype){
-    blobStorage.saveToBlob(filename,file,function(err,result){
+  busboy.on('file', function (fieldname, file, filename, encoding, mimetype) {
+    blobStorage.saveToBlob(filename, file, function (err, result) {
       if (err) {
-        res.send(500,err);
+        res.send(500, err);
       }
-      else{
+      else {
         res.redirect('/show?name=' + encodeURI(filename));
       }
     });
   });
   req.pipe(busboy);
 });
-router.get('/show',function(req,res){
-  res.render('show',{
-    name:req.query.name,
+router.get('/show', function (req, res) {
+  res.render('show', {
+    name: req.query.name,
     url: blobStorage.getUrl(req.query.name)
   });
 });

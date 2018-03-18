@@ -2,7 +2,14 @@ const gulp = require('gulp');
 const nodemon = require('gulp-nodemon');
 const plumber = require('gulp-plumber');
 const livereload = require('gulp-livereload');
+const jshint = require('gulp-jshint');
 
+gulp.task('lint', function () {
+  return gulp.src(['app/**/*.js', 'config/**/*.js', '*.js'])
+    .pipe(jshint())
+    .pipe(jshint.reporter())
+    .pipe(jshint.reporter('fail'));
+});
 
 gulp.task('develop', () => {
   livereload.listen();

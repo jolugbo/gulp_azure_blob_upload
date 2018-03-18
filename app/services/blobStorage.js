@@ -1,5 +1,5 @@
-process.env['AZURE_STORAGE_ACCOUNT'] = 'fractalstore';
-process.env['AZURE_STORAGE_ACCESS_KEY'] = '9YOOUuiE7FKERBOwh+q4+lNjkW7t94U3zm8NVRY1Z7P3CPF140AwcszTfe6QUH5Fu8eDUlnL7YmEe086nqqqaA==';
+process.env.AZURE_STORAGE_ACCOUNT = 'fractalsblobstorage';//'fractalstore';
+process.env.AZURE_STORAGE_ACCESS_KEY = '8YejD1ge1Nvbr3N3ucNjI1E/b4/qNtgxPttG/oZjXD7fIjVUt2R2YhRLN1+5+Q7eKkMF1Tc1veHO6UNg6fRYdA==';
 
 var azure = require('azure-storage');
 var blobService = azure.createBlobService();
@@ -24,10 +24,10 @@ function getUrl(name){
             Expiry: expiryDate
         }
     };
-    var sasToken = blobService.generateSharedAccessSignature(images,name,sharedAccessPolicy)
+    var sasToken = blobService.generateSharedAccessSignature(images,name,sharedAccessPolicy);
     return blobService.getUrl(images,name,sasToken);
 }
 module.exports={
     saveToBlob: saveToBlob,
     getUrl: getUrl
-}
+};
