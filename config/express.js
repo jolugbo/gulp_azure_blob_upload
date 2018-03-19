@@ -1,24 +1,24 @@
-const express = require('express');
-const glob = require('glob');
+var express = require('express');
+var glob = require('glob');
 
 
-const favicon = require('serve-favicon');
-const logger = require('morgan');
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-const compress = require('compression');
-const methodOverride = require('method-override');
-const appInsights = require('applicationinsights');
+var favicon = require('serve-favicon');
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+var compress = require('compression');
+var methodOverride = require('method-override');
+var appInsights = require('applicationinsights');
 
-const instrumentationKey = 'f7802948-ea47-419e-9224-42b78ae39f21';
+var instrumentationKey = 'f7802948-ea47-419e-9224-42b78ae39f21';
 
-module.exports = (app, config) => {
-  const env = process.env.NODE_ENV || 'development';
+module.exports = function(app, config){
+  var env = process.env.NODE_ENV || 'development';
   app.locals.ENV = env;
   app.locals.ENV_DEVELOPMENT = env == 'development';
 
   appInsights.setup(instrumentationKey).start();
-  const aiClient = appInsights.defaultClient;
+  var aiClient = appInsights.defaultClient;
 
   app.set('views', config.root + '/app/views');
   app.set('view engine', 'jade');
@@ -39,18 +39,18 @@ module.exports = (app, config) => {
   app.use(methodOverride());
 
   var controllers = glob.sync(config.root + '/app/controllers/*.js');
-  controllers.forEach((controller) => {
+  controllers.forEach(function(controller){
     require(controller)(app);
   });
 
-  app.use((req, res, next) => {
+  app.use(function(req, res, next){
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
   });
 
   if (app.get('env') === 'development') {
-    app.use((err, req, res, next) => {
+    app.use(function(err, req, res, next){
       res.status(err.status || 500);
       res.render('error', {
         message: err.message,
@@ -60,7 +60,7 @@ module.exports = (app, config) => {
     });
   }
 
-  app.use((err, req, res, next) => {
+  app.use(function(err, req, res, next){
     aiClient.trackException(err);
     res.status(err.status || 500);
     res.render('error', {

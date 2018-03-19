@@ -1,8 +1,8 @@
-const path = require('path');
-const rootPath = path.normalize(__dirname + '/..');
-const env = process.env.NODE_ENV || 'development';
+var path = require('path');
+var rootPath = path.normalize(__dirname + '/..');
+var env = process.env.NODE_ENV || 'development';
 
-const config = {
+var config = {
  // instrumentationKey: 'f7802948-ea47-419e-9224-42b78ae39f21',
   development: {
     root: rootPath,

@@ -1,17 +1,17 @@
-const express = require('express');
-const router = express.Router();
-const Busboy = require('busboy');
-const blobStorage = require('../services/blobStorage');
-const Article = require('../models/article');
-const Config = require('../../config/config');
+var express = require('express');
+var router = express.Router();
+var Busboy = require('busboy');
+var blobStorage = require('../services/blobStorage');
+var Article = require('../models/article');
+var Config = require('../../config/config');
 
-module.exports = (app) => {
+module.exports = function(app) {
   app.use('/', router);
 };
 
-router.get('/', (req, res, next) => {
+router.get('/', function(req, res, next){
   //throw new Error("Failed!!");
-  const articles = [new Article(), new Article()];
+  var articles = [new Article(), new Article()];
   res.render('index', {
     title: Config.app.name,
     articles: articles

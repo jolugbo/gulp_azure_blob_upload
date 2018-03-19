@@ -1,8 +1,8 @@
-const gulp = require('gulp');
-const nodemon = require('gulp-nodemon');
-const plumber = require('gulp-plumber');
-const livereload = require('gulp-livereload');
-const jshint = require('gulp-jshint');
+var gulp = require('gulp');
+var nodemon = require('gulp-nodemon');
+var plumber = require('gulp-plumber');
+var livereload = require('gulp-livereload');
+var jshint = require('gulp-jshint');
 
 gulp.task('lint', function () {
   return gulp.src(['app/**/*.js', 'config/**/*.js', '*.js'])
@@ -11,14 +11,14 @@ gulp.task('lint', function () {
     .pipe(jshint.reporter('fail'));
 });
 
-gulp.task('develop', () => {
+gulp.task('develop', function(){
   livereload.listen();
   nodemon({
     script: 'app.js',
     ext: 'js coffee jade',
     stdout: false
   }).on('readable', function () {
-    this.stdout.on('data', (chunk) => {
+    this.stdout.on('data', function(chunk){
       if (/^Express server listening on port/.test(chunk)) {
         livereload.changed(__dirname);
       }
