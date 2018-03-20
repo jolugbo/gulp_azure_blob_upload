@@ -1,5 +1,5 @@
-process.env.AZURE_STORAGE_ACCOUNT = 'fractalsblobstorage';//'fractalstore';
-process.env.AZURE_STORAGE_ACCESS_KEY = '8YejD1ge1Nvbr3N3ucNjI1E/b4/qNtgxPttG/oZjXD7fIjVUt2R2YhRLN1+5+Q7eKkMF1Tc1veHO6UNg6fRYdA==';
+process.env.AZURE_STORAGE_ACCOUNT = 'fractalstore';
+process.env.AZURE_STORAGE_ACCESS_KEY = 'bE4vatbNGAM6UhcAKJVAcVtYecN+fAP5TwH+8Uc75bN+2jGzSPKKVa2J74lRA4wLqd306QZVt+XRPnK/i8vhLA==';
 
 var azure = require('azure-storage');
 var blobService = azure.createBlobService();
