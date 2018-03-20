@@ -1,4 +1,4 @@
-process.env.AZURE_STORAGE_ACCOUNT = 'fractal';
+process.env.AZURE_STORAGE_ACCOUNT = 'fractals';
 process.env.AZURE_STORAGE_ACCESS_KEY = 'bE4vatbNGAM6UhcAKJVAcVtYecN+fAP5TwH+8Uc75bN+2jGzSPKKVa2J74lRA4wLqd306QZVt+XRPnK/i8vhLA==';
 
 var azure = require('azure-storage');
